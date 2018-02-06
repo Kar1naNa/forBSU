@@ -1,0 +1,12 @@
+$ git log
+commit 9bf06cdc46a77a9aa20d1e13a8132b767429a5ca (HEAD -> master)
+Author: Karina <karina_cheshko@mail.ru>
+Date:   Tue Feb 6 12:31:14 2018 +0300
+
+    change status.txt
+
+commit e798185e57dd51ec5535dc548ebb68aee83e4474
+Author: Karina <karina_cheshko@mail.ru>
+Date:   Tue Feb 6 12:27:51 2018 +0300
+
+    add .gitignore
