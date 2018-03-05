@@ -144,6 +144,24 @@ input:focus {
     border: 3px black;
 }
 
+.title-tags:hover .list-tags {
+    position: absolute;
+    display: inline-block;
+    height: auto;
+    width: auto;
+}
+
+.list-tags > p {
+    width: 100%;
+}
+
+.list-tags {
+    display: none;
+    background: #A09C9C;
+    height: auto;
+    width: auto;
+}
+
 .username {
     font-family: "Segoe UI", sans-serif;
     font-weight: bold;
@@ -197,7 +215,7 @@ input:focus {
     max-height: 300px;
 }
 
-/*значки лайка и избранного*/
+
 .actionElements {
     width: 40px;
     height: 40px;
@@ -213,7 +231,7 @@ input:focus {
     height: 300px;
 }
 
-.count-favorite{
+.count-favorite {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -233,17 +251,13 @@ input:focus {
     align-items: flex-start;
     font-family: "Segoe112", sans-serif;
     width: 40%;
-
 }
 
 .annotation {
-
     text-overflow: ellipsis;
     word-wrap: break-word;
     overflow: auto;
-
     width: 100%;
-
     height: 200px;
 }
 
@@ -251,7 +265,7 @@ input:focus {
     border-bottom: darkslategray dashed 2px;
 }
 
-.tags {
+.title-tags {
     border-bottom: solid 2px;
 }
 
@@ -274,21 +288,21 @@ footer {
 }
 
 .picport {
-    padding-left: 40%;
-    padding-right: 40%;
     height: 120px;
     width: 250px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.scrollup{
-    width:40px;
-    height:40px;
-    position:fixed;
-    bottom:50px;
-    right:100px;
+.scrollup {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
     display: block;
+    z-index: 10;
 }
-
 
 /*выделение текста*/
 ::selection {
@@ -326,9 +340,11 @@ footer {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        align-items: center;
+        align-items: baseline;
         width: 350px;
-        height: 55px;
+        height: auto;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .photo {
@@ -349,7 +365,6 @@ footer {
     .actionElements {
         width: 32px;
         height: 32px;
-
     }
 
     .info-wrapper {
@@ -369,5 +384,15 @@ footer {
 
     .nickname {
         border-bottom: darkslategray dashed 2px;
+    }
+
+    .scrollup {
+        width: 40px;
+        height: 40px;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: block;
+        z-index: 10;
     }
 }
