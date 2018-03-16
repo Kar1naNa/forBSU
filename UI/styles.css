@@ -215,7 +215,6 @@ input:focus {
     max-height: 300px;
 }
 
-
 .actionElements {
     width: 40px;
     height: 40px;
@@ -241,6 +240,34 @@ input:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.whoLikedIt {
+    display: none;
+    background: #A09C9C;
+    height: auto;
+    width: auto;
+}
+
+.whoFavoriteIt {
+    display: none;
+    background: #A09C9C;
+    height: auto;
+    width: auto;
+}
+
+.count-likes:hover .whoLikedIt {
+    display: inline-block;
+    position: absolute;
+    height: auto;
+    width: auto;
+}
+
+.count-favorite:hover .whoFavoriteIt {
+    display: inline-block;
+    position: absolute;
+    height: auto;
+    width: auto;
 }
 
 .info-wrapper {
