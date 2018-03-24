@@ -1,6 +1,5 @@
 var Module = (function () {
 
-
     var photoPosts = [
         {
             id: '1',

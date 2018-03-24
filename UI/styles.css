@@ -84,16 +84,16 @@ img {
     height: 25px;
 }
 
-input {
-    color: #b42f2f;
-    width: 75%;
-    position: relative;
-    transition: .3s linear;
-}
+/*input {*/
+/*color: #b42f2f;*/
+/*width: 75%;*/
+/*position: relative;*/
+/*transition: .3s linear;*/
+/*}*/
 
-input:focus {
-    width: 100%;
-}
+/*input:focus {*/
+/*width: 100%;*/
+/*}*/
 
 .apply {
     width: 75%;
@@ -306,14 +306,6 @@ footer {
     font-size: 80%;
 }
 
-.refresh {
-    margin-left: 50%;
-    margin-right: 50%;
-    height: 40px;
-    width: 40px;
-    padding-bottom: 40px;
-}
-
 .picport {
     height: 120px;
     width: 250px;
@@ -329,6 +321,22 @@ footer {
     right: 100px;
     display: block;
     z-index: 10;
+    cursor: n-resize;
+}
+
+.add-post {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    margin-top: 15px;
+    margin-left: 90%;
+    display: block;
+    z-index: 5;
+    cursor: cell;
+}
+
+#changeButton{
+    display: none;
 }
 
 /*выделение текста*/
@@ -336,6 +344,100 @@ footer {
     background: dimgrey;
     color: white;
 
+}
+
+.load-button {
+    width: 20%;
+    height: 50px;
+    display: table;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    background-color: #b42f2f;
+    text-decoration: none;
+    color: black;
+    font-family: Segoe112;
+    font-weight: bold;
+    font-size: 25px;
+    cursor: pointer;
+    outline: none;
+}
+
+.load-more {
+    width: 100%;
+}
+
+.loading {
+    height: 50px;
+    display: none;
+    margin: auto;
+    cursor: wait;
+}
+
+.loading .letter {
+    animation-name: load;
+    animation-duration: 1.6s;
+    animation-iteration-count: infinite;
+    animation-direction: initial;
+    float: left;
+    font-size: 25px;
+    color: #777;
+}
+
+@keyframes load {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.l-1 {
+    animation-delay: .48s;
+}
+
+.l-2 {
+    animation-delay: .6s;
+}
+
+.l-3 {
+    animation-delay: .72s;
+}
+
+.l-4 {
+    animation-delay: .84s;
+}
+
+.l-5 {
+    animation-delay: .96s;
+}
+
+.l-6 {
+    animation-delay: 1.08s;
+}
+
+.l-7 {
+    animation-delay: 1.2s;
+}
+
+.l-8 {
+    animation-delay: 1.32s;
+}
+
+.l-9 {
+    animation-delay: 1.44s;
+}
+
+.l-10 {
+    animation-delay: 1.56s;
+}
+
+.letter-holder {
+    width: auto;
+    height: 40px;
+    bottom: 30px;
+    right: 30px;
 }
 
 @media all and (max-device-width: 850px) {
