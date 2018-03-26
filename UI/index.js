@@ -1,18 +1,25 @@
 var Module = (function () {
 
+    var user = {
+        name: "Karina",
+        idPerson: '8'
+    };
+
+    var coutShowedPosts = 0;
+
     var photoPosts = [
         {
             id: '1',
             idPerson: '1',
             author: 'annica',
             description: 'Воспоминания бесценны',
-            createdAt: new Date(2018, 11, 26, 11, 41, 12),
+            createdAt: new Date(2018, 11, 26),
             photoLink: 'assets/photo1.png',
             favorites: ['Lola', 'No name', 'Karina', 'alexx'],
-            countFavorites: 4,
             likes: ['Nina', 'Viola', 'Mable'],
-            countLikes: 3,
-            hashTags: ['море', 'отпуск', 'Новая-Зеландия', 'былиВНовойЗеландии']
+            hashTags: ['море', 'отпуск', 'Новая-Зеландия', 'былиВНовойЗеландии'],
+            isLikedIt: false,
+            isFavoritedIt: true
         },
         {
             id: '2',
@@ -25,7 +32,9 @@ var Module = (function () {
             countFavorites: 2,
             likes: ['Santa'],
             countLikes: 1,
-            hashTags: ['Аннабель', 'мойлюбимыйребенок', 'мыкупилизоопарк', 'какукрастьшляпу']
+            hashTags: ['Аннабель', 'мойлюбимыйребенок', 'мыкупилизоопарк', 'какукрастьшляпу'],
+            isLikedIt: false,
+            isFavoritedIt: true
         },
         {
             id: '3',
@@ -38,7 +47,9 @@ var Module = (function () {
             countFavorites: 1,
             likes: ['KlaraWrittenBlog'],
             countLikes: 1,
-            hashTags: ['морскаязвезда', 'подводныекамни']
+            hashTags: ['морскаязвезда', 'подводныекамни'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '4',
@@ -51,7 +62,9 @@ var Module = (function () {
             countFavorites: 0,
             likes: ['Santa'],
             countLikes: 1,
-            hashTags: []
+            hashTags: [],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '5',
@@ -64,7 +77,9 @@ var Module = (function () {
             countFavorites: 0,
             likes: ['Nina', 'Viola'],
             countLikes: 2,
-            hashTags: ['книгинашевсе', 'хочубытьюиюлиотекарем']
+            hashTags: ['книгинашевсе', 'хочубытьюиюлиотекарем'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '6',
@@ -77,7 +92,9 @@ var Module = (function () {
             countFavorites: 0,
             likes: [],
             countLikes: 0,
-            hashTags: []
+            hashTags: [],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
 
         {
@@ -91,7 +108,9 @@ var Module = (function () {
             countFavorites: 2,
             likes: ['НеГлупаяБлондинка', 'Viola'],
             countLikes: 2,
-            hashTags: []
+            hashTags: [],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '8',
@@ -104,7 +123,9 @@ var Module = (function () {
             countFavorites: 0,
             likes: ['Nina', 'Viola', 'KlaraWrittenBlog', 'alexx'],
             countLikes: 4,
-            hashTags: ['яуедужитьвлондон', 'мнемоскваНЕбудетсниться']
+            hashTags: ['яуедужитьвлондон', 'мнемоскваНЕбудетсниться'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '9',
@@ -117,7 +138,9 @@ var Module = (function () {
             countFavorites: 1,
             likes: ['Karina', 'annica', 'alexx', 'Lola', 'KlaraWrittenBlog', 'No name', 'Алина Воробьева', 'Santa'],
             countLikes: 8,
-            hashTags: ['найдименя']
+            hashTags: ['найдименя'],
+            isLikedIt: true,
+            isFavoritedIt: true
         },
         {
             id: '10',
@@ -130,7 +153,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['Амстердам', 'найдименя']
+            hashTags: ['Амстердам', 'найдименя'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '11',
@@ -143,7 +168,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['доброеУтро']
+            hashTags: ['доброеУтро'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '12',
@@ -156,8 +183,11 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['шлемПриветы']
-        }, {
+            hashTags: ['шлемПриветы'],
+            isLikedIt: false,
+            isFavoritedIt: false
+        },
+        {
             id: '13',
             idPerson: '5',
             author: 'НеГлупаяБлондинка',
@@ -168,7 +198,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: []
+            hashTags: [],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '14',
@@ -181,7 +213,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['ч/б', 'новыеобои']
+            hashTags: ['ч/б', 'новыеобои'],
+            isLikedIt: false,
+            isFavoritedIt: false
         }, {
             id: '15',
             idPerson: '11',
@@ -193,7 +227,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['самаяСчастливая', 'ниДняБезСмеха', '365днейСчастья']
+            hashTags: ['самаяСчастливая', 'ниДняБезСмеха', '365днейСчастья'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '16',
@@ -206,7 +242,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['Норвегия']
+            hashTags: ['Норвегия'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '17',
@@ -219,7 +257,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['MyHomeIsMyCastle', 'октябрь']
+            hashTags: ['MyHomeIsMyCastle', 'октябрь'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '18',
@@ -232,11 +272,13 @@ var Module = (function () {
             countFavorites: 1,
             likes: [],
             countLikes: 0,
-            hashTags: ['nature', 'sun']
+            hashTags: ['nature', 'sun'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '19',
-            idPerson: '8',
+            idPerson: '10',
             author: 'Viola',
             description: 'Когда мечты становятся реальностью... С Днем Рождения меня!!!',
             createdAt: new Date(2017, 8, 29, 10, 52),
@@ -245,7 +287,9 @@ var Module = (function () {
             countFavorites: 1,
             likes: [],
             countLikes: 0,
-            hashTags: ['HappyBirthday', 'dreamcometrue']
+            hashTags: ['HappyBirthday', 'dreamcometrue'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
         {
             id: '20',
@@ -258,7 +302,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['грипп', 'желтыеЛимоны']
+            hashTags: ['грипп', 'желтыеЛимоны'],
+            isLikedIt: false,
+            isFavoritedIt: false
         },
 
         {
@@ -272,7 +318,9 @@ var Module = (function () {
             countFavorites: 3,
             likes: ['annica', 'alexx', 'НеГлупаяБлондинка', 'Алина Воробьева', 'Lola'],
             countLikes: 5,
-            hashTags: ['пп', 'прхудеюКЛету']
+            hashTags: ['пп', 'прхудеюКЛету'],
+            isLikedIt: false,
+            isFavoritedIt: false
         }
     ];
 
@@ -417,10 +465,13 @@ var Module = (function () {
         return null;
     };
 
-
     var addPhotoPost = function (photoPost) {
         if (validatePhotoPost(photoPost)) {
             photoPosts.push(photoPost);
+
+            let newPhotoPostBlock = createPhotoPostBlock(photoPost);
+            let content = document.getElementsByClassName("content")[0].appendChild(newPhotoPostBlock);
+
         }
     };
 
@@ -430,6 +481,10 @@ var Module = (function () {
             return false;
         }
 
+        let oldPostBlock = document.getElementById(id);
+
+        let contentBlock = document.getElementsByClassName("content")[0];
+
         for (var property in photoPost) {
             if (photoPost[property]) {
                 if (checkers[property] && checkers[property](photoPost[property])) {
@@ -437,17 +492,204 @@ var Module = (function () {
                 }
             }
         }
+
+        let newPostBlock = createPhotoPostBlock(getPhotoPost(id));
+        contentBlock.replaceChild(newPostBlock, oldPostBlock);
+
         return true;
     };
 
     var removePhotoPost = function (id) {
         var index = findPhotoPostById(id);
         if (index !== -1) {
+            let forDelete = document.getElementsByClassName("content")[0];
+            forDelete.removeChild(document.getElementById(id));
             photoPosts.splice(index, 1);
             return true;
         }
         return false;
     };
+
+    function createImageWrapperBlock(photoPost) {
+        let imageWrapperDiv = document.createElement('div');
+        imageWrapperDiv.className = "image-wrapper";
+
+        let image = document.createElement('img');
+        image.className = "photo";
+        image.src = photoPost.photoLink;
+        image.alt = "Изображение";
+
+        imageWrapperDiv.appendChild(image);
+        return imageWrapperDiv;
+    }
+
+    function createActionsWrapper(photoPost) {
+        let actionsWrapperDiv = document.createElement('div');
+        actionsWrapperDiv.className = "actions-wrapper";
+
+        let favoriteWrapper = document.createElement('div');
+        favoriteWrapper.className = "count-favorite";
+
+        let star = document.createElement('img');
+        star.className = "actionElements";
+
+        if (photoPost.isFavoritedIt) {
+            star.src = "assets/blackstar.png";
+            star.alt = "В избранном";
+        }
+        else {
+            star.src = "assets/whitestar.png";
+            star.alt = "Добавить в избранное";
+        }
+
+        let countFavorite = document.createElement('span');
+        countFavorite.innerHTML = photoPost.favorites.length;
+
+        let whoFavoriteItDiv = document.createElement('div');
+        whoFavoriteItDiv.className = "whoFavoriteIt";
+
+        if (photoPost.favorites.length) {
+            for (let i = 0; i < photoPost.favorites.length; i++) {
+                let whoFavoriteIt = document.createElement('p');
+                whoFavoriteIt.innerHTML = photoPost.favorites[i];
+                whoFavoriteItDiv.appendChild(whoFavoriteIt);
+            }
+        }
+
+        favoriteWrapper.appendChild(star);
+        favoriteWrapper.appendChild(countFavorite);
+        favoriteWrapper.appendChild(whoFavoriteItDiv);
+
+        let likeWrapper = document.createElement('div');
+        likeWrapper.className = "count-likes";
+
+        let heart = document.createElement('img');
+        heart.className = "actionElements";
+
+        if (photoPost.isLikedIt) {
+            heart.src = "assets/redlike.png";
+            heart.alt = "Мне нравится";
+        }
+        else {
+            heart.src = "assets/whitelike.png";
+            heart.alt = "Нравится?";
+        }
+
+        let countLikes = document.createElement('span');
+        countLikes.innerHTML = photoPost.likes.length;
+
+        let whoLikedItDiv = document.createElement('div');
+        whoLikedItDiv.className = "whoLikedIt";
+
+        if (photoPost.likes.length) {
+            for (let i = 0; i < photoPost.likes.length; i++) {
+                let whoLikedIt = document.createElement('p');
+                whoLikedIt.innerHTML = photoPost.likes[i];
+                whoLikedItDiv.appendChild(whoLikedIt);
+            }
+        }
+
+        likeWrapper.appendChild(heart);
+        likeWrapper.appendChild(countLikes);
+        likeWrapper.appendChild(whoLikedItDiv);
+
+        actionsWrapperDiv.appendChild(favoriteWrapper);
+        actionsWrapperDiv.appendChild(likeWrapper);
+
+
+        if (user && user.idPerson === photoPost.idPerson) {
+            var changeWrapper = document.createElement('div');
+            changeWrapper.className = "changePost";
+
+            let changePostImg = document.createElement("img");
+            changePostImg.src = "assets/settings.png";
+            changePostImg.alt = "Изменить";
+            changePostImg.className = "actionElements";
+
+            changeWrapper.appendChild(changePostImg);
+
+            actionsWrapperDiv.appendChild(changeWrapper);
+        }
+
+        return actionsWrapperDiv;
+    }
+
+    function createInfoWrapper(photoPost) {
+        let infoWrapperDiv = document.createElement('div');
+        infoWrapperDiv.className = "info-wrapper";
+
+        let nickname = document.createElement('div');
+        nickname.innerHTML = photoPost.author;
+        nickname.className = "nickname";
+
+        let annotation = document.createElement('div');
+        annotation.innerHTML = photoPost.description;
+        annotation.className = "annotation";
+
+        let tagsWrapper = document.createElement('div');
+        tagsWrapper.className = "title-tags";
+        tagsWrapper.innerHTML = "ТЕГИ";
+
+        let listTags = document.createElement('div');
+        listTags.className = "list-tags";
+
+        for (let i = 0; i < photoPost.hashTags.length; i++) {
+            let oneTag = document.createElement('p');
+            oneTag.innerHTML = photoPost.hashTags[i];
+            listTags.appendChild(oneTag);
+        }
+
+        tagsWrapper.appendChild(listTags);
+
+        let creationData = document.createElement('div');
+        creationData.className = "data";
+        creationData.innerHTML = photoPost.createdAt.toDateString();
+
+        infoWrapperDiv.appendChild(nickname);
+        infoWrapperDiv.appendChild(annotation);
+        infoWrapperDiv.appendChild(tagsWrapper);
+        infoWrapperDiv.appendChild(creationData);
+
+        return infoWrapperDiv;
+    }
+
+    function createPhotoPostBlock(photoPost) {
+        let photoPostDiv = document.createElement('div');
+        photoPostDiv.className = "photopost";
+        photoPostDiv.id = photoPost.id;
+        photoPostDiv.appendChild(createImageWrapperBlock(photoPost));
+        photoPostDiv.appendChild(createActionsWrapper(photoPost));
+        photoPostDiv.appendChild(createInfoWrapper(photoPost));
+        return photoPostDiv;
+    }
+
+    function displayPhotoPosts(photoPosts) {
+        let content = document.getElementsByClassName("content")[0];
+        console.log(content);
+        for (let i = 0; i < photoPosts.length; i++) {
+            content.appendChild(createPhotoPostBlock(photoPosts[i]));
+        }
+    }
+
+    function initUser() {
+        let logolineBlock = document.getElementsByClassName("logo-line")[0];
+        let loginButton = document.createElement('a');
+        loginButton.className = "username";
+
+        if (!user) {
+            loginButton.innerHTML = "Регистрация/Вход";
+            loginButton.href = "#";
+        }
+
+        else {
+            loginButton.innerHTML = user.name;
+            loginButton.title = "Мой профиль";
+            loginButton.href = "#";
+        }
+
+        logolineBlock.appendChild(loginButton);
+
+    }
 
     return {
         getPhotoPosts: getPhotoPosts,
@@ -455,7 +697,9 @@ var Module = (function () {
         validatePhotoPost: validatePhotoPost,
         addPhotoPost: addPhotoPost,
         editPhotoPost: editPhotoPost,
-        removePhotoPost: removePhotoPost
+        removePhotoPost: removePhotoPost,
+        displayPhotoPosts: displayPhotoPosts,
+        initUser: initUser
     };
 
 }());
