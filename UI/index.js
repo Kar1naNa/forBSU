@@ -5,6 +5,10 @@ var Module = (function () {
         idPerson: '8'
     };
 
+    var getUser = function(){
+        return user;
+    };
+
     var coutShowedPosts = 0;
 
     var photoPosts = [
@@ -392,15 +396,14 @@ var Module = (function () {
             return;
         }
 
-        var skipped = 0;
-        var photoPostsFilter = [];
+        let skipped = 0;
+        let photoPostsFilter = [];
 
         for (var i = 0; i < photoPosts.length; i++) {
-            if (checkPostForFilterSutable(photoPosts[i], filterConfig)) {
+            if (checkPostForFilterSuitable(photoPosts[i], filterConfig)) {
                 if (skipped < skip) {
                     skipped++;
-                }
-                else {
+                } else {
                     photoPostsFilter.push(photoPosts[i]);
                     if (top === photoPostsFilter.length)
                         break;
@@ -411,8 +414,8 @@ var Module = (function () {
         return photoPostsFilter;
     };
 
-    var checkPostForFilterSutable = function (photoPost, filterConfig) {
-        var isGood = true;
+    var checkPostForFilterSuitable = function (photoPost, filterConfig) {
+        let isGood = true;
         if (filterConfig) {
             if (filterConfig.author !== undefined && photoPost.author !== filterConfig.author) {
                 isGood = false;
@@ -420,8 +423,8 @@ var Module = (function () {
 
             if (isGood && filterConfig.hashTags && filterConfig.hashTags.length
                 && photoPost.hashTags.length) {
-                for (var j = 0; j < filterConfig.hashTags.length; j++) {
-                    var hashtag = filterConfig.hashTags[j];
+                for (let j = 0; j < filterConfig.hashTags.length; j++) {
+                    let hashtag = filterConfig.hashTags[j];
 
                     if (!photoPost.hashTags.includes(hashtag)) {
                         isGood = false;
@@ -447,7 +450,7 @@ var Module = (function () {
     };
 
     var validatePhotoPost = function (photoPost) {
-        for (var property in photoPost) {
+        for (let property in photoPost) {
             if (photoPost[property]) {
                 if (!checkers[property] || !checkers[property](photoPost[property])) {
                     return false;
@@ -458,7 +461,7 @@ var Module = (function () {
     };
 
     var getPhotoPost = function (id) {
-        var index = findPhotoPostById(id);
+        let index = findPhotoPostById(id);
         if (index !== -1) {
             return photoPosts[index];
         }
@@ -469,14 +472,14 @@ var Module = (function () {
         if (validatePhotoPost(photoPost)) {
             photoPosts.push(photoPost);
 
-            let newPhotoPostBlock = createPhotoPostBlock(photoPost);
+            let newPhotoPostBlock = DomModule.createPhotoPostBlock(photoPost);
             let content = document.getElementsByClassName("content")[0].appendChild(newPhotoPostBlock);
 
         }
     };
 
     var editPhotoPost = function (id, photoPost) {
-        var i = findPhotoPostById(id);
+        let i = findPhotoPostById(id);
         if (i === -1) {
             return false;
         }
@@ -485,7 +488,7 @@ var Module = (function () {
 
         let contentBlock = document.getElementsByClassName("content")[0];
 
-        for (var property in photoPost) {
+        for (let property in photoPost) {
             if (photoPost[property]) {
                 if (checkers[property] && checkers[property](photoPost[property])) {
                     photoPosts[i][property] = photoPost[property];
@@ -493,14 +496,14 @@ var Module = (function () {
             }
         }
 
-        let newPostBlock = createPhotoPostBlock(getPhotoPost(id));
+        let newPostBlock = DomModule.createPhotoPostBlock(getPhotoPost(id));
         contentBlock.replaceChild(newPostBlock, oldPostBlock);
 
         return true;
     };
 
     var removePhotoPost = function (id) {
-        var index = findPhotoPostById(id);
+        let index = findPhotoPostById(id);
         if (index !== -1) {
             let forDelete = document.getElementsByClassName("content")[0];
             forDelete.removeChild(document.getElementById(id));
@@ -509,6 +512,47 @@ var Module = (function () {
         }
         return false;
     };
+
+
+    return {
+        getPhotoPosts: getPhotoPosts,
+        getPhotoPost: getPhotoPost,
+        validatePhotoPost: validatePhotoPost,
+        addPhotoPost: addPhotoPost,
+        editPhotoPost: editPhotoPost,
+        removePhotoPost: removePhotoPost,
+        getUser: getUser
+    };
+
+}());
+
+var DomModule = (function () {
+
+    function initUser() {
+        let logolineBlock = document.getElementsByClassName("logo-line")[0];
+        let loginButton = document.createElement('a');
+        loginButton.className = "username";
+
+        if (!Module.getUser) {
+            loginButton.innerHTML = "Регистрация/Вход";
+            loginButton.href = "#";
+        } else {
+            loginButton.innerHTML = Module.getUser().name;
+            loginButton.title = "Мой профиль";
+            loginButton.href = "#";
+        }
+
+        logolineBlock.appendChild(loginButton);
+
+    }
+
+    function displayPhotoPosts(photoPosts) {
+        let content = document.getElementsByClassName("content")[0];
+        console.log(content);
+        for (let i = 0; i < photoPosts.length; i++) {
+            content.appendChild(createPhotoPostBlock(photoPosts[i]));
+        }
+    }
 
     function createImageWrapperBlock(photoPost) {
         let imageWrapperDiv = document.createElement('div');
@@ -523,9 +567,7 @@ var Module = (function () {
         return imageWrapperDiv;
     }
 
-    function createActionsWrapper(photoPost) {
-        let actionsWrapperDiv = document.createElement('div');
-        actionsWrapperDiv.className = "actions-wrapper";
+    function createFavoriteWrapperBlock(photoPost) {
 
         let favoriteWrapper = document.createElement('div');
         favoriteWrapper.className = "count-favorite";
@@ -536,8 +578,7 @@ var Module = (function () {
         if (photoPost.isFavoritedIt) {
             star.src = "assets/blackstar.png";
             star.alt = "В избранном";
-        }
-        else {
+        } else {
             star.src = "assets/whitestar.png";
             star.alt = "Добавить в избранное";
         }
@@ -560,6 +601,11 @@ var Module = (function () {
         favoriteWrapper.appendChild(countFavorite);
         favoriteWrapper.appendChild(whoFavoriteItDiv);
 
+        return favoriteWrapper;
+    }
+
+    function createLikeWrapperBlock(photoPost) {
+
         let likeWrapper = document.createElement('div');
         likeWrapper.className = "count-likes";
 
@@ -569,8 +615,7 @@ var Module = (function () {
         if (photoPost.isLikedIt) {
             heart.src = "assets/redlike.png";
             heart.alt = "Мне нравится";
-        }
-        else {
+        } else {
             heart.src = "assets/whitelike.png";
             heart.alt = "Нравится?";
         }
@@ -593,12 +638,19 @@ var Module = (function () {
         likeWrapper.appendChild(countLikes);
         likeWrapper.appendChild(whoLikedItDiv);
 
-        actionsWrapperDiv.appendChild(favoriteWrapper);
-        actionsWrapperDiv.appendChild(likeWrapper);
+        return likeWrapper;
+    }
+
+    function createActionsWrapper(photoPost) {
+        let actionsWrapperDiv = document.createElement('div');
+        actionsWrapperDiv.className = "actions-wrapper";
+
+        actionsWrapperDiv.appendChild(createFavoriteWrapperBlock(photoPost));
+        actionsWrapperDiv.appendChild(createLikeWrapperBlock(photoPost));
 
 
-        if (user && user.idPerson === photoPost.idPerson) {
-            var changeWrapper = document.createElement('div');
+        if (Module.getUser() && Module.getUser().idPerson === photoPost.idPerson) {
+            let changeWrapper = document.createElement('div');
             changeWrapper.className = "changePost";
 
             let changePostImg = document.createElement("img");
@@ -663,43 +715,15 @@ var Module = (function () {
         return photoPostDiv;
     }
 
-    function displayPhotoPosts(photoPosts) {
-        let content = document.getElementsByClassName("content")[0];
-        console.log(content);
-        for (let i = 0; i < photoPosts.length; i++) {
-            content.appendChild(createPhotoPostBlock(photoPosts[i]));
-        }
-    }
-
-    function initUser() {
-        let logolineBlock = document.getElementsByClassName("logo-line")[0];
-        let loginButton = document.createElement('a');
-        loginButton.className = "username";
-
-        if (!user) {
-            loginButton.innerHTML = "Регистрация/Вход";
-            loginButton.href = "#";
-        }
-
-        else {
-            loginButton.innerHTML = user.name;
-            loginButton.title = "Мой профиль";
-            loginButton.href = "#";
-        }
-
-        logolineBlock.appendChild(loginButton);
-
-    }
-
     return {
-        getPhotoPosts: getPhotoPosts,
-        getPhotoPost: getPhotoPost,
-        validatePhotoPost: validatePhotoPost,
-        addPhotoPost: addPhotoPost,
-        editPhotoPost: editPhotoPost,
-        removePhotoPost: removePhotoPost,
+        initUser: initUser,
         displayPhotoPosts: displayPhotoPosts,
-        initUser: initUser
-    };
+        createImageWrapperBlock: createImageWrapperBlock,
+        createFavoriteWrapperBlock: createFavoriteWrapperBlock,
+        createLikeWrapperBlock: createLikeWrapperBlock,
+        createActionsWrapper: createActionsWrapper,
+        createInfoWrapper: createInfoWrapper,
+        createPhotoPostBlock: createPhotoPostBlock
+    }
 
 }());

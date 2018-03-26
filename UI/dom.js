@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
-
-
     document.getElementsByClassName('scrollup')[0].onclick = function () {
         scrollTo(document.documentElement, 0, 300);
     };
@@ -34,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }, 10);
     }
 
-    Module.displayPhotoPosts(Module.getPhotoPosts());
-    Module.initUser();
+    DomModule.displayPhotoPosts(Module.getPhotoPosts());
+    DomModule.initUser();
 
 }());
 
