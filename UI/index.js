@@ -5,7 +5,11 @@ var Module = (function () {
         idPerson: '8'
     };
 
-    var getUser = function(){
+    var filter = {};
+
+    let unloadedPost = 0;
+
+    var getUser = function () {
         return user;
     };
 
@@ -392,7 +396,7 @@ var Module = (function () {
         }
 
         if (filterConfig && typeof filterConfig !== 'object') {
-            console.log('Error type1');
+            console.log('Error type');
             return;
         }
 
@@ -410,6 +414,9 @@ var Module = (function () {
                 }
             }
         }
+
+        unloadedPost += skip;
+        filter = filterConfig;
 
         return photoPostsFilter;
     };
@@ -508,11 +515,10 @@ var Module = (function () {
             let forDelete = document.getElementsByClassName("content")[0];
             forDelete.removeChild(document.getElementById(id));
             photoPosts.splice(index, 1);
-            return true;
         }
-        return false;
-    };
 
+        return DomModule.displayPhotoPosts(Module.getPhotoPosts(unloadedPost, filter));
+    };
 
     return {
         getPhotoPosts: getPhotoPosts,
