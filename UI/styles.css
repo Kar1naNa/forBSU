@@ -185,6 +185,8 @@ img {
     align-items: center;
     flex-grow: 1;
     flex-wrap: wrap;
+    height: auto;
+    max-width: 100%;
 }
 
 .photopost {
@@ -195,6 +197,7 @@ img {
     margin: 30px;
     height: 300px;
     width: 800px;
+    background-color: white;
     /*граница для фотопоста*/
     border-style: solid;
     border-radius: 0 3px 3px 0;

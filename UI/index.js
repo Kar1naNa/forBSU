@@ -5,9 +5,9 @@ var Module = (function () {
         idPerson: '8'
     };
 
-    var filter = {};
+    var contentBlock = document.getElementsByClassName("content")[0];
 
-    let unloadedPost = 0;
+    var filter = {};
 
     var getUser = function () {
         return user;
@@ -415,7 +415,6 @@ var Module = (function () {
             }
         }
 
-        unloadedPost += skip;
         filter = filterConfig;
 
         return photoPostsFilter;
@@ -478,46 +477,31 @@ var Module = (function () {
     var addPhotoPost = function (photoPost) {
         if (validatePhotoPost(photoPost)) {
             photoPosts.push(photoPost);
-
-            let newPhotoPostBlock = DomModule.createPhotoPostBlock(photoPost);
-            let content = document.getElementsByClassName("content")[0].appendChild(newPhotoPostBlock);
-
         }
     };
 
-    var editPhotoPost = function (id, photoPost) {
+    var editPhotoPost = function (id, newPhotoPost) {
         let i = findPhotoPostById(id);
         if (i === -1) {
             return false;
         }
 
-        let oldPostBlock = document.getElementById(id);
-
-        let contentBlock = document.getElementsByClassName("content")[0];
-
-        for (let property in photoPost) {
-            if (photoPost[property]) {
-                if (checkers[property] && checkers[property](photoPost[property])) {
-                    photoPosts[i][property] = photoPost[property];
+        for (let property in newPhotoPost) {
+            if (newPhotoPost[property]) {
+                if (checkers[property] && checkers[property](newPhotoPost[property])) {
+                    photoPosts[i][property] = newPhotoPost[property];
                 }
             }
         }
 
-        let newPostBlock = DomModule.createPhotoPostBlock(getPhotoPost(id));
-        contentBlock.replaceChild(newPostBlock, oldPostBlock);
-
-        return true;
     };
 
     var removePhotoPost = function (id) {
         let index = findPhotoPostById(id);
         if (index !== -1) {
-            let forDelete = document.getElementsByClassName("content")[0];
-            forDelete.removeChild(document.getElementById(id));
             photoPosts.splice(index, 1);
         }
 
-        return DomModule.displayPhotoPosts(Module.getPhotoPosts(unloadedPost, filter));
     };
 
     return {
@@ -527,12 +511,40 @@ var Module = (function () {
         addPhotoPost: addPhotoPost,
         editPhotoPost: editPhotoPost,
         removePhotoPost: removePhotoPost,
-        getUser: getUser
+        getUser: getUser,
+        findPhotoPostById: findPhotoPostById,
+        filter: filter
     };
 
 }());
 
 var DomModule = (function () {
+
+    let showedPosts = 0;
+
+    function addPhotoPostBlock(photoPost) {
+        Module.addPhotoPost(photoPost);
+        let newPhotoPostBlock = createPhotoPostBlock(photoPost);
+        let contentBlock = document.getElementsByClassName("content")[0];
+        contentBlock.appendChild(newPhotoPostBlock);
+        showedPosts++;
+    }
+
+    function editPhotoPostBlock(id, newPhotoPost) {
+        Module.editPhotoPost(id, newPhotoPost);
+        let oldPhotoPost = document.getElementById(id);
+        let newPostBlock = DomModule.createPhotoPostBlock(Module.getPhotoPost(newPhotoPost.id));
+        let contentBlock = document.getElementsByClassName("content")[0];
+        contentBlock.replaceChild(newPostBlock, oldPhotoPost);
+    }
+
+    function removePhotoPostBlock(photoPost) {
+        let contentBlock = document.getElementsByClassName("content")[0];
+        contentBlock.removeChild(document.getElementById(photoPost.id));
+        showedPosts--;
+        Module.removePhotoPost(photoPost.id);
+        displayPhotoPosts(Module.getPhotoPosts(showedPosts, 1, Module.filter));
+    }
 
     function initUser() {
         let logolineBlock = document.getElementsByClassName("logo-line")[0];
@@ -554,9 +566,9 @@ var DomModule = (function () {
 
     function displayPhotoPosts(photoPosts) {
         let content = document.getElementsByClassName("content")[0];
-        console.log(content);
         for (let i = 0; i < photoPosts.length; i++) {
             content.appendChild(createPhotoPostBlock(photoPosts[i]));
+            showedPosts++;
         }
     }
 
@@ -729,7 +741,10 @@ var DomModule = (function () {
         createLikeWrapperBlock: createLikeWrapperBlock,
         createActionsWrapper: createActionsWrapper,
         createInfoWrapper: createInfoWrapper,
-        createPhotoPostBlock: createPhotoPostBlock
+        createPhotoPostBlock: createPhotoPostBlock,
+        removePhotoPostBlock: removePhotoPostBlock,
+        addPhotoPostBlock: addPhotoPostBlock,
+        editPhotoPostBlock: editPhotoPostBlock
     }
 
 }());
