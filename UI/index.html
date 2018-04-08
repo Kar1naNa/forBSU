@@ -28,7 +28,7 @@
     <div class="filter-line">
         <div class="filterpar">
             <strong>
-                <a class="filter" href="">Фильтр
+                <div class="filter">Фильтр
                     <div class="filtmenu">
                         <a href="#">по имени</a>
                         <form id="for_name"></form>
@@ -45,11 +45,11 @@
                             <p class="for_tag"><input type="search" placeholder="Теги" form="for_tag"></p>
                         </a>
                         <p>
-                            <button class="apply" type="submit">Применить</button>
+                        <div class="apply">Применить</div>
                         </p>
                         <button class="reset" type="reset">Сбросить</button>
                     </div>
-                </a>
+                </div>
             </strong>
         </div>
 
@@ -57,10 +57,18 @@
 
 </header>
 
-<img class="add-post" id="add-post" src="assets/plus.png">
+<div class="page">
 
-<div class="content"></div>
+    <div class="FILTER "></div>
 
+    <div class="content"></div>
+
+    <div class="">
+        <img class="add-post" id="add-post" src="assets/plus.png">
+        <img id="button-up" class="scrollup" src="assets/up-button.svg">
+    </div>
+
+</div>
 
 <div class="load-more" id="load-more-id">
     <input type="button" class="load-button" value="Показать еще">
@@ -81,9 +89,6 @@
         <div class="l-10 letter">.</div>
     </div>
 </div>
-
-
-<img id="button-up" class="scrollup" src="assets/up-button.svg">
 
 
 <footer>

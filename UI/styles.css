@@ -32,6 +32,11 @@ header {
     width: 100%;
 }
 
+.page{
+    display: flex;
+    justify-content: space-around;
+}
+
 a {
     font-family: sans-serif;
     color: black;
@@ -84,19 +89,21 @@ img {
     height: 25px;
 }
 
-/*input {*/
-/*color: #b42f2f;*/
-/*width: 75%;*/
-/*position: relative;*/
-/*transition: .3s linear;*/
-/*}*/
 
-/*input:focus {*/
-/*width: 100%;*/
-/*}*/
 
 .apply {
-    width: 75%;
+    background-color: #D4D4D4;
+    border-radius:  2px;
+    text-decoration: black;
+    text-align: center;
+    height: 30px;
+    width: 20%;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: table;
+
+    
 }
 
 .reset {
@@ -181,15 +188,21 @@ img {
     display: flex;
     flex-direction: column;
     margin-top: 5em;
+    margin-bottom: 5em;
     justify-content: center;
     align-items: center;
     flex-grow: 1;
     flex-wrap: wrap;
     height: auto;
     max-width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background: #eeeeee;
 }
 
 .photopost {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
+   //box-shadow: 10px 5px 5px black;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -324,7 +337,7 @@ footer {
     right: 100px;
     display: block;
     z-index: 10;
-    cursor: n-resize;
+    cursor: pointer;
 }
 
 .add-post {
@@ -334,11 +347,11 @@ footer {
     margin-top: 15px;
     margin-left: 90%;
     display: block;
-    z-index: 5;
+    z-index: 11;
     cursor: cell;
 }
 
-#changeButton{
+#changeButton {
     display: none;
 }
 
@@ -368,6 +381,7 @@ footer {
 
 .load-more {
     width: 100%;
+
 }
 
 .loading {
