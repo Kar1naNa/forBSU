@@ -458,7 +458,7 @@ var Module = (function () {
     var validatePhotoPost = function (photoPost) {
         for (let property in photoPost) {
             if (photoPost[property]) {
-                if (!checkers[property] || !checkers[property](photoPost[property])) {
+                if (!checkers[property] || !checkers[property](photoPost[property]) || findPhotoPostById(photoPost.id())) {
                     return false;
                 }
             }
@@ -538,11 +538,11 @@ var DomModule = (function () {
         contentBlock.replaceChild(newPostBlock, oldPhotoPost);
     }
 
-    function removePhotoPostBlock(photoPost) {
+    function removePhotoPostBlock(id) {
         let contentBlock = document.getElementsByClassName("content")[0];
-        contentBlock.removeChild(document.getElementById(photoPost.id));
+        contentBlock.removeChild(document.getElementById(id));
         showedPosts--;
-        Module.removePhotoPost(photoPost.id);
+        Module.removePhotoPost(id);
         displayPhotoPosts(Module.getPhotoPosts(showedPosts, 1, Module.filter));
     }
 
