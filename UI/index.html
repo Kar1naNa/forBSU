@@ -25,50 +25,52 @@
         </a>
     </div>
 
-    <div class="filter-line">
-        <div class="filterpar">
-            <strong>
-                <div class="filter">Фильтр
-                    <div class="filtmenu">
-                        <a href="#">по имени</a>
-                        <form id="for_name"></form>
-                        <p class="for_name"><input type="search" placeholder="Ваше имя" form="for_name"></p>
-                        <a href="#">по дате
-                            <form id="for_data"></form>
-                            <p class="for_data"><input type="search" placeholder="ДД/ММ/ГГГГ" form="for_data"></p>
-                            <br>
-                            <p class="for_data"><input type="search" placeholder="ДД/ММ/ГГГГ" form="for_data"></p>
+    <!--<div class="filter-line">-->
+        <!--<div class="filterpar">-->
+            <!--<strong>-->
+                <!--<div class="filter">Фильтр-->
+                    <!--<div class="filtmenu">-->
+                        <!--<a href="#">по имени</a>-->
+                        <!--<form id="for_name"></form>-->
+                        <!--<p class="for_name"><input type="search" placeholder="Ваше имя" form="for_name"></p>-->
+                        <!--<a href="#">по дате-->
+                            <!--<form id="for_data"></form>-->
+                            <!--<p class="for_data"><input type="search" placeholder="ДД/ММ/ГГГГ" form="for_data"></p>-->
+                            <!--<br>-->
+                            <!--<p class="for_data"><input type="search" placeholder="ДД/ММ/ГГГГ" form="for_data"></p>-->
 
-                        </a>
-                        <a href="#"> по тегам
-                            <form id="for_tag"></form>
-                            <p class="for_tag"><input type="search" placeholder="Теги" form="for_tag"></p>
-                        </a>
-                        <p>
-                        <div class="apply">Применить</div>
-                        </p>
-                        <button class="reset" type="reset">Сбросить</button>
-                    </div>
-                </div>
-            </strong>
-        </div>
+                        <!--</a>-->
+                        <!--<a href="#"> по тегам-->
+                            <!--<form id="for_tag"></form>-->
+                            <!--<p class="for_tag"><input type="search" placeholder="Теги" form="for_tag"></p>-->
+                        <!--</a>-->
+                        <!--<p>-->
+                        <!--<div class="apply">Применить</div>-->
+                        <!--</p>-->
+                        <!--<button class="reset" type="reset">Сбросить</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</strong>-->
+        <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
 </header>
 
-<div class="page">
 
-    <div class="FILTER "></div>
 
-    <div class="content"></div>
-
-    <div class="">
-        <img class="add-post" id="add-post" src="assets/plus.png">
-        <img id="button-up" class="scrollup" src="assets/up-button.svg">
+<div class="add-post">
+    <div class="add-button"></div>
+    <div class="clip-circle">
+      <!--место для добавления формы нового поста-->
     </div>
-
 </div>
+
+<div class="content"></div>
+
+
+<img id="button-up" class="scrollup" src="assets/up-button.svg">
+
 
 <div class="load-more" id="load-more-id">
     <input type="button" class="load-button" value="Показать еще">
@@ -107,5 +109,6 @@
 </footer>
 <script defer src="dom.js"></script>
 <script src="index.js"></script>
+<!--<script type="text/javascript" src="data.json"></script>-->
 </body>
 </html>

@@ -2,16 +2,20 @@ var Module = (function () {
 
     var user = {
         name: "Karina",
-        idPerson: '8'
+        idPerson: '8',
+
+        isAdmin: true
     };
-
-    var contentBlock = document.getElementsByClassName("content")[0];
-
-    var filter = {};
 
     var getUser = function () {
         return user;
     };
+
+    if (user.isAdmin) {localStorage.setItem("add-button",true);}
+
+    var contentBlock = document.getElementsByClassName("content")[0];
+
+    var filter = {};
 
     var coutShowedPosts = 0;
 
@@ -332,6 +336,12 @@ var Module = (function () {
         }
     ];
 
+    //заносим фотопосты в локал сторедж
+    var photoPostsString = JSON.stringify(photoPosts);
+    localStorage.setItem("photoPosts", photoPostsString);
+
+    photoPosts = null;
+
     var checkers = {
 
         id: function (id) {
@@ -402,6 +412,9 @@ var Module = (function () {
 
         let skipped = 0;
         let photoPostsFilter = [];
+
+        //получаем посты из локал и парсим в массив
+        photoPosts = JSON.parse(localStorage.getItem("photoPosts"));
 
         for (var i = 0; i < photoPosts.length; i++) {
             if (checkPostForFilterSuitable(photoPosts[i], filterConfig)) {
@@ -503,6 +516,10 @@ var Module = (function () {
         }
 
     };
+
+    var fillLocalStorage = function () {
+        
+    }
 
     return {
         getPhotoPosts: getPhotoPosts,
@@ -713,7 +730,7 @@ var DomModule = (function () {
 
         let creationData = document.createElement('div');
         creationData.className = "data";
-        creationData.innerHTML = photoPost.createdAt.toDateString();
+        creationData.innerHTML = photoPost.createdAt;
 
         infoWrapperDiv.appendChild(nickname);
         infoWrapperDiv.appendChild(annotation);

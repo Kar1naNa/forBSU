@@ -1,0 +1,13 @@
+{
+  "id": "1",
+  "idPerson": "1",
+  "author": "annica",
+  "description": "Воспоминания бесценны",
+  "createdAt": "new Date(2018, 11, 26)",
+  "photoLink": "assets/photo1.png",
+  "favorites": ["Lola", "No name", "Karina", "alexx"],
+  "likes": ["Nina", "Viola", "Mable"],
+  "hashTags": ["море", "отпуск", "Новая-Зеландия", "былиВНовойЗеландии"],
+  "isLikedIt": false,
+  "isFavoritedIt": true
+}

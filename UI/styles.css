@@ -51,6 +51,45 @@ a:hover {
     text-decoration: none;
 }
 
+.add-post {
+
+    position: fixed;
+    min-height: 100vh;
+    z-index: 999;
+}
+
+
+.clip-circle {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #8e8e8e;
+    clip-path: circle(19px at 90% calc(50px + 23px));
+    transition: clip-path .4s ease-in;
+    z-index: 2;
+}
+
+.add-button {
+    display: block;
+    position: fixed;
+    left: calc(90% - 23px);
+    top: calc(50px + 83px);
+    background-size: cover;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIfXsnemLCIeFyg57FU_YQHS2eQbtvjE5rmltLLVmIXHJrtRBQ");
+    box-shadow: 0 0 10px 2px rgba(14, 14, 14, 0.63);
+    width: 46px;
+    height: 46px;
+    border-radius: 70%;
+    cursor: pointer;
+    z-index: 5;
+}
+
+
+.add-post.active .clip-circle {
+    clip-path: circle(100% at 90% 15%);
+    transition: clip-path .4s ease-in;
+}
+
 img {
     max-width: 100%;
 }
@@ -197,7 +236,6 @@ img {
     max-width: 100%;
     margin-left: 10%;
     margin-right: 10%;
-    background: #eeeeee;
 }
 
 .photopost {
@@ -330,6 +368,7 @@ footer {
 }
 
 .scrollup {
+    left: calc(90% - 23px + 3px);
     width: 40px;
     height: 40px;
     position: fixed;
@@ -338,17 +377,6 @@ footer {
     display: block;
     z-index: 10;
     cursor: pointer;
-}
-
-.add-post {
-    width: 40px;
-    height: 40px;
-    position: fixed;
-    margin-top: 15px;
-    margin-left: 90%;
-    display: block;
-    z-index: 11;
-    cursor: cell;
 }
 
 #changeButton {
