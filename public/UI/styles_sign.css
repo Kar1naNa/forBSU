@@ -1,0 +1,285 @@
+html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.sign {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("sign/background-image.jpg");
+    font-family: "Segoe UI", sans-serif;
+    color: white;
+}
+
+.sign-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.gradient-paraloid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 550px;
+    width: 450px;
+    background: linear-gradient(to bottom right, white, #8e8e8e8e);
+}
+
+.substrate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    outline: none;
+    height: 400px;
+    width: 350px;
+    background: black;
+}
+
+input {
+    font-size: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+}
+
+.alternanive {
+    font-size: 17px;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border: 2px solid white;
+    margin: 25px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.input-information {
+    height: 22px;
+    margin: 10px;
+}
+
+.key-worlds {
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.social-networks {
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.social-network {
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+}
+
+.instruction {
+    font-size: 10px;
+}
+
+.login-buttons {
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign-guest-login {
+    letter-spacing: 2px;
+    font-size: 17px;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border: 2px solid white;
+    margin: 25px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.button {
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 15px 30px;
+    margin: 35px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    color: white;
+    background-color: rgba(76, 175, 80, 0.9);
+    border-color: rgb(76, 175, 80);
+}
+
+@media all and (max-device-width: 550px) {
+    html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-image: url("sign/background-image.jpg");
+        font-family: "Segoe UI", sans-serif;
+        color: white;
+    }
+
+    .darker {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .gradient-paraloid {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 850px;
+        width: 695px;
+        background: linear-gradient(to bottom right, white, #8e8e8e8e);
+    }
+
+    .substrate {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        outline: none;
+        height: 618px;
+        width: 541px;
+        background: black;
+    }
+
+    input {
+        font-size: 25px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .key-worlds {
+        font-size: 33px;
+        letter-spacing: 2px;
+    }
+
+    p {
+        margin-bottom: 23px;
+    }
+
+    .social-networks {
+        width: 250px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .social-network {
+        cursor: pointer;
+        height: 60px;
+        width: 60px;
+    }
+
+    .instruction {
+        font-size: 10px;
+    }
+
+    .input-information {
+        height: 40px;
+        width: 240px;
+        margin-right: 25px;
+        margin-left: 25px;
+        float: right;
+    }
+
+    .login-buttons {
+        outline: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 33px;
+    }
+
+    .button {
+        outline: none;
+        text-align: center;
+        text-decoration: none;
+        font-size: 33px;
+        padding: 20px 40px;
+        margin-bottom: 35px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+
+    }
+
+    .green-button {
+        color: white;
+        background-color: rgba(76, 175, 80, 0.9);
+        border-color: rgb(76, 175, 80);
+    }
+
+    .grey-button {
+        cursor: pointer;
+        padding: 25px 30px;
+        color: black;
+        height: 20px;
+        border: none;
+        font-size: 25px;
+        background: inherit;
+        text-decoration: underline black;
+    }
+
+    .sign-guest-login {
+        letter-spacing: 2px;
+        font-size: 17px;
+        font-weight: bold;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        border: 2px solid white;
+        margin: 25px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+}

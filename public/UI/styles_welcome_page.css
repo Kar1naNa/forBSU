@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
+@import url('https://fonts.googleapis.com/css?family=Caveat');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.welcome {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: url("welcome-page/background-image.jpg");
+    font-family: "Segoe UI", sans-serif;
+    color: white;
+    background-size: cover;
+}
+
+.welcome-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.welcome-title {
+    text-align: center;
+    border: 8px double white;
+    font-size: 50px;
+    padding: 30px;
+    margin-bottom: 50px;
+    font-weight: bold;
+    letter-spacing: 1vw;
+}
+
+.first-world {
+    font-family: 'Poiret One', cursive;
+}
+
+.second-world {
+    font-family: 'Caveat', cursive;
+}
+
+.third-world {
+    font-family: 'Amatic SC', cursive;
+}
+
+.fourth-world {
+    font-family: 'Indie Flower', cursive;
+}
+
+.buttons_welcome-page {
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.button_welcome {
+    outline: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+
+}
+
+.green-button-wp {
+    color: white;
+    background-color: rgba(76, 175, 80, 0.9);
+    border-color: rgb(76, 175, 80);
+}
+
+.registration-welcome {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+}

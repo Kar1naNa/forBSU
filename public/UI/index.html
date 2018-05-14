@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="application-name" content="PicPort"/>
+    <meta name="keywords" content="photo, picture, view, image"/>
+    <meta name="description" content="Сайт для размещения и просмотра фотографий, картинок"/>
+    <meta name="author" content="Karina Cheshko"/>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <link href="styles_registration.css" rel="stylesheet" type="text/css"/>
+    <link href="styles_welcome_page.css" rel="stylesheet" type="text/css"/>
+    <link href="styles_sign.css" rel="stylesheet" type="text/css"/>
+    <link href="styles-my-profile.css" rel="stylesheet" type="text/css"/>
+
+    <link href="assets/favicon.ico" rel="icon" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PicPort</title>
+</head>
+
+<body class="welcome">
+
+<div class="welcome-page">
+    <div class="welcome-page-wrapper">
+        <div class="welcome-title">
+            <span class="first-world">Добро</span>
+            <br>
+            <span class="second-world">пожаловать</span> <br>
+            <span class="third-world">на</span> <br>
+            <span class="fourth-world">PicPort</span> <br>
+        </div>
+        <div class="buttons-welcome_page">
+            <button class="button_welcome grey-button-wp guest-welcome">Гостевой вход</button>
+            <button class="button_welcome green-button-wp">Регистрация</button>
+            <button class="button_welcome registration-welcome">Войти</button>
+        </div>
+    </div>
+</div>
+
+<div class="sign-page">
+    <div class="sign-wrapper">
+        <div class="gradient-paraloid">
+            <div class="substrate">
+
+                <form>
+
+                    <p>
+                        <b class="key-worlds">Логин</b>
+                        <input id="registration-login" type="text" size="20"
+                               class="input-information" placeholder="Иван Иванов" title="A-Z, a-z, 0-9">
+                    </p>
+
+                    <p>
+                        <b class="key-worlds">Пароль</b>
+                        <input id="registration-password" type="password"
+                               placeholder="**********" class="input-information" title="Не более 8 символов"> <br>
+                    </p>
+
+                    <p>
+                        <b class="key-worlds">Email</b>
+                        <input id="registration-email" type="email" class="input-information" placeholder="ivan_ivanov@mail.ru"
+                               title="Вам будет отправлено письмо"> <br>
+                    </p>
+
+
+                </form>
+
+            </div>
+
+            <div class="login-buttons">
+                <input class="button green-button sign-button" type="submit" value="Зарегистрироваться">
+            </div>
+
+
+            <span class="sign-guest-login" title="Еще нет аккаунта?">Гостевой вход</span>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="registration-page">
+
+    <div class="registration-darker">
+        <div class="registration-gradient-paraloid">
+            <div class="registration-substrate">
+                <form>
+                    <p>
+                        <b class="registration-key-worlds">Логин</b>
+                        <input id="sign-login" type="text" size="20"
+                               class="registration-input-information" placeholder="Иван Иванов" title="A-Z, a-z, 0-9">
+                    </p>
+
+                    <p>
+                        <b class="registration-key-worlds">Пароль</b>
+                        <input id="sign-password" type="password"
+                               placeholder="**********" class="registration-input-information" title="Не более 8 символов"> <br>
+                    </p>
+                </form>
+
+            </div>
+
+            <div class="registration-login-buttons">
+                <input class="registration-grey-button" type="reset" value="Забыли пароль?">
+                <input class="registration-button green-button" type="submit" value="Отправить">
+            </div>
+
+        </div>
+
+        <span class="registration-guest-login">Гостевой вход</span>
+
+    </div>
+
+</div>
+
+<div class="my-profile-page">
+
+    <div class="my-profile-header">
+
+        <div class="logo-line">
+            <img class="logo" src="my-profile/logo.png" title="PicPort.by" alt="Логотип"/>
+        </div>
+
+    </div>
+
+    <div class="my-profile">
+
+        <div class="profile-name">
+        </div>
+
+        <div class="action-buttons-wrapper">
+            <div class="saved-liked-image">
+                <img class="action-button" src="my-profile/blackstar.png">
+                <img class="action-button" src="my-profile/redlike.png">
+            </div>
+            <div class="delete-add-image">
+                <img class="action-button" src="my-profile/picture.png">
+                <img class="my-profile-door" src="assets/close_filter.png" title="Закрыть"/>
+
+            </div>
+        </div>
+
+        <div class="changes-wrapper">
+            <span class="change">Изменить EMail</span>
+            <span class="change">Изменить пароль</span>
+        </div>
+
+        <div class="my-profile-information">Для редактирования фотопоста выберите его левой клавишей мыши</div>
+
+        <div class="photoposts-in-profile">
+
+            <div class="my-profile-image-wrapper">
+                <img class="my-profile-photopost-image" src="my-profile/photo11.jpg">
+                <span class="description-post">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urna, eget tristique velit. Sed vestibulum, mi a accumsan maximus, nulla turpis varius enim, non eleifend nisi metus metus.
+            </span>
+            </div>
+
+            <div class="my-profile-image-wrapper">
+                <img class="my-profile-photopost-image" src="my-profile/photo11.jpg">
+                <span class="description-post">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urna, eget tristique velit. Sed vestibulum, mi a accumsan maximus, nulla turpis varius enim, non eleifend nisi metus metus.            </span>
+            </div>
+
+            <div class="my-profile-image-wrapper">
+                <img class="my-profile-photopost-image" src="my-profile/photo11.jpg">
+                <span class="description-post">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urna, eget tristique velit. Sed vestibulum, mi a accumsan maximus, nulla turpis varius enim, non eleifend nisi metus metus.            </span>
+            </div>
+
+            <div class="my-profile-image-wrapper">
+                <img class="my-profile-photopost-image" src="my-profile/photo11.jpg">
+                <span class="description-post">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urna, eget tristique velit. Sed vestibulum, mi a accumsan maximus, nulla turpis varius enim, non eleifend nisi metus metus.            </span>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="lenta">
+
+    <header>
+
+        <div class="lenta-logo-line">
+            <a href="index.html">
+                <img class="logo" src="assets/logo.png" title="PicPort.by" alt="Логотип"/>
+            </a>
+            <img class="door" src="assets/door.png" title="Выход"/>
+            <span class="username"></span>
+            <span class="reg-sign"></span>
+
+        </div>
+
+    </header>
+
+    <div class="filter_body">
+
+        <div class="filter_menu" id="filter_menu">
+            <img class="filter_icon" src="assets/filter_icon.png">
+        </div>
+
+        <div class='menu'>
+            <nav>
+
+                <p class="filter">ФИЛЬТР</p>
+
+                <ul>
+                    <li>
+                        <div class="filter_name filter_object">
+                            <div>по имени</div>
+                            <input class="filter_input filter-name" placeholder="Иван Иванов" maxlength="12">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="filter_date filter_object">
+                            <div>по дате</div>
+                            <form class="date">
+                                <input type="date" class="filter_input filter-date-from" min="1900-01-01" value="1900-01-01">
+                                <br>
+                                <input type="date" class="filter_input filter-date-to" max="2018-04-18" value="2018-04-19">
+                            </form>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="filter_tags filter_object add_new_input">
+                            <div>по тегам</div>
+                            <input type="text" class="filter_input filter-tags" placeholder="" maxlength="20">
+
+                            <img class="add_tag_input" src="assets/plus%20(1).png"
+                                 title="Добавить еще один тег для поиска">
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="filter_buttons">
+                    <a href="#" class="filter_button _ok">Применить</a>
+                    <a href="#" class="filter_button _clear">Очистить</a>
+                </div>
+
+            </nav>
+        </div>
+
+    </div>
+
+    <div class="add-post">
+        <div class="add-button"></div>
+        <div class="clip-circle">
+
+            <div class="new_image_wrapper">
+
+                <div class="new-post">
+
+                    <button class="new-post-image">
+                        <span class="new-post-image-title">ЗАГРУЗИТЬ</span>
+                        <span class="new-post-image-title">ФОТО</span>
+                    </button>
+
+                    <form name="description">
+
+            <textarea class="new-post-description" maxlength="200" wrap="soft"
+                      required name="description">Введите описание</textarea>
+
+                    </form>
+
+                </div>
+
+                <button class="new-post-add-tags">Добавить теги</button>
+                <div class="tags_new_post">ТЕГИ</div>
+
+                    <div class="list-tags-new-post">
+                        <p>#11252454654654654</p>
+                        <p>#2123456789</p>
+                    </div>
+
+                <div>
+                    <button class="new-post-ok">Применить</button>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="content"></div>
+
+
+    <img id="button-up" class="scrollup" src="assets/up-button.svg">
+
+
+    <div class="load-more" id="load-more-id">
+        <input type="button" class="load-button" value="Показать еще">
+    </div>
+
+
+    <div class="loading" id="loading-state">
+        <div class="letter-holder">
+            <div class="l-1 letter">L</div>
+            <div class="l-2 letter">o</div>
+            <div class="l-3 letter">a</div>
+            <div class="l-4 letter">d</div>
+            <div class="l-5 letter">i</div>
+            <div class="l-6 letter">n</div>
+            <div class="l-7 letter">g</div>
+            <div class="l-8 letter">.</div>
+            <div class="l-9 letter">.</div>
+            <div class="l-10 letter">.</div>
+        </div>
+    </div>
+
+
+    <footer>
+
+        <div class="information">
+            <p>Все права защищены &copy; 2018</p>
+            <p>БГУ ФПМИ 2 курс 8 группа</p>
+        </div>
+        <div class="about-me">
+            <p>Karina Cheshko</p>
+            <p>karina_cheshko@mail.ru</p>
+        </div>
+        <div class="last-change">
+            <p>27.02.2018</p>
+        </div>
+    </footer>
+    <script defer type="text/javascript" src="data.json"></script>
+    <script defer type="text/javascript" src="dom.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</div>
+
+</body>
+
+</html>
