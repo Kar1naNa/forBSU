@@ -58,7 +58,8 @@
 
                     <p>
                         <b class="key-worlds">Email</b>
-                        <input id="registration-email" type="email" class="input-information" placeholder="ivan_ivanov@mail.ru"
+                        <input id="registration-email" type="email" class="input-information"
+                               placeholder="ivan_ivanov@mail.ru"
                                title="Вам будет отправлено письмо"> <br>
                     </p>
 
@@ -94,7 +95,8 @@
                     <p>
                         <b class="registration-key-worlds">Пароль</b>
                         <input id="sign-password" type="password"
-                               placeholder="**********" class="registration-input-information" title="Не более 8 символов"> <br>
+                               placeholder="**********" class="registration-input-information"
+                               title="Не более 8 символов"> <br>
                     </p>
                 </form>
 
@@ -211,16 +213,18 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urn
                     <li>
                         <div class="filter_name filter_object">
                             <div>по имени</div>
-                            <input class="filter_input filter-name" placeholder="Иван Иванов" maxlength="12">
+                            <input class="filter_input filter-name" placeholder="Иван Иванов" maxlength="20">
                         </div>
                     </li>
                     <li>
                         <div class="filter_date filter_object">
                             <div>по дате</div>
                             <form class="date">
-                                <input type="date" class="filter_input filter-date-from" min="1900-01-01" value="1900-01-01">
+                                <input title="" type="date" class="filter_input filter-date-from" min="1900-01-01"
+                                       value="1900-01-01">
                                 <br>
-                                <input type="date" class="filter_input filter-date-to" max="2018-04-18" value="2018-04-19">
+                                <input title="" type="date" class="filter_input filter-date-to" max="2018-04-18"
+                                       value="2018-04-19">
                             </form>
                         </div>
                     </li>
@@ -236,7 +240,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urn
                 </ul>
 
                 <div class="filter_buttons">
-                    <a href="#" class="filter_button _ok">Применить</a>
+                    <a href="#" class="filter_button _ok for-filter">Применить</a>
                     <a href="#" class="filter_button _clear">Очистить</a>
                 </div>
 
@@ -251,29 +255,30 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urn
 
             <div class="new_image_wrapper">
 
-                <div class="new-post">
+                <form enctype="multipart/form-data" method="post">
+                    <div class="file-upload">
+                        <input type="file" id="file" name="file" accept="image/*">
+                        <label for="file" class="label-for-file">
+                            <span>Загрузить фото</span>
+                        </label>
+                    </div>
 
-                    <button class="new-post-image">
-                        <span class="new-post-image-title">ЗАГРУЗИТЬ</span>
-                        <span class="new-post-image-title">ФОТО</span>
-                    </button>
+                </form>
 
-                    <form name="description">
+                <img src="" class="">
 
-            <textarea class="new-post-description" maxlength="200" wrap="soft"
+                <form name="description">
+
+            <textarea title="Введите описание" class="new-post-description" maxlength="200" wrap="soft"
                       required name="description">Введите описание</textarea>
 
-                    </form>
-
-                </div>
+                </form>
 
                 <button class="new-post-add-tags">Добавить теги</button>
-                <div class="tags_new_post">ТЕГИ</div>
 
-                    <div class="list-tags-new-post">
-                        <p>#11252454654654654</p>
-                        <p>#2123456789</p>
-                    </div>
+                <ul class="list-new-tags">
+
+                </ul>
 
                 <div>
                     <button class="new-post-ok">Применить</button>
@@ -282,7 +287,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urn
                 </div>
 
             </div>
-
 
         </div>
     </div>
@@ -294,7 +298,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id fermentum urn
 
 
     <div class="load-more" id="load-more-id">
-        <input type="button" class="load-button" value="Показать еще">
+        <input type="button" class="load-button" id="load-button" value="Показать еще">
     </div>
 
 

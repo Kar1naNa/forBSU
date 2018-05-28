@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    DomModule.displayPhotoPosts(Module.getPhotoPosts());
-    DomModule.initUser();
-
     let count_filter_icon = 1;
+    let add_username = true;
+    let filter_config = {};
 
     document.getElementsByClassName('scrollup')[0].onclick = function () {
         scrollTo(document.documentElement, 0, 300);
@@ -22,19 +21,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     //показать еще
     document.getElementById('load-more-id').onclick = function () {
-        document.getElementById('load-more-id').style.display = "none";
+        document.getElementById('load-button').style.display = "none";
         document.getElementById('loading-state').style.display = "table";
 
-        let posts = Module.getPhotoPosts(Module.countShowedPosts, 10);
-        DomModule.displayPhotoPosts(posts);
+        if (Module.allPostsShowed) {
+            document.getElementById('load-button').style.display = "none";
 
-        document.getElementById('load-more-id').style.display = "table";
+        } else {
+            let posts = Module.getPhotoPosts(Module.countShowedPosts, 10, filter_config);
+            DomModule.displayPhotoPosts(posts);
+        }
+
+        document.getElementById('load-button').style.display = "table";
         document.getElementById('loading-state').style.display = "none";
     };
 
     /*************************************************************************************************/
 
-    let add_button = document.getElementsByClassName("add-button");
+    let add_button = document.getElementsByClassName("add-button")[0];
 
     let content = document.getElementsByClassName('content')[0];
 
@@ -52,16 +56,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     let my_profile_page = document.getElementsByClassName("my-profile-page")[0];
 
-    add_button[0].onclick = function () {
+    add_button.onclick = function () {
         let elem = document.getElementsByClassName('add-post')[0];
         if (!elem.classList.contains('active')) {
-
 
             door.style.display = 'none';
 
             elem.classList.add('active');
 
-            tr[0].style.backgroundImage = "url('http://image.flaticon.com/icons/png/512/262/262037.png')";
+            add_button.style.backgroundImage = "url('http://image.flaticon.com/icons/png/512/262/262037.png')";
         } else {
             username.style.display = 'block';
 
@@ -69,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             elem.classList.remove('active');
 
-            add_button[0].style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIfXsnemLCIeFyg57FU_YQHS2eQbtvjE5rmltLLVmIXHJrtRBQ')";
+            add_button.style.backgroundImage = "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIfXsnemLCIeFyg57FU_YQHS2eQbtvjE5rmltLLVmIXHJrtRBQ')";
         }
     };
 
@@ -106,16 +109,41 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     };
 
-    //Фильтрация
+    //Применение фильтра
 
-    let filter_name = document.getElementsByClassName("filter-name")[0].value;
+    let apply = document.getElementsByClassName("for-filter")[0];
 
-    let filter_tags = document.getElementsByClassName("filter-tags")[0].value;
+    apply.onclick = function () {
 
-    let filter_date_from = document.getElementsByClassName("filter-date-from")[0].value;
+        Module.setCountShowedPosts(0);
 
-    let filter_date_to = document.getElementsByClassName("filter-date-to")[0].value;
+        let filter_name = document.getElementsByClassName("filter-name")[0].value;
 
+        let filter_tags = [];
+        for (let i = 0; i < count_filter_icon; i++) {
+            let val = document.getElementsByClassName("filter-tags")[i].value;
+
+            if (val.length > 0)
+                filter_tags.push(val);
+        }
+
+        let filter_date_from = document.getElementsByClassName("filter-date-from")[0].value;
+        let filter_date_to = document.getElementsByClassName("filter-date-to")[0].value;
+
+        filter_config['author'] = filter_name.length > 0 ? filter_name : undefined;
+
+        filter_config['dateTo'] = filter_date_from === "" ? undefined : new Date(filter_date_to);
+        filter_config['dateFrom'] = filter_date_from === "" ? undefined : new Date(filter_date_from);
+        filter_config['hashTags'] = filter_tags;
+
+        let last;
+        while (last = content.lastChild) {
+            content.removeChild(last)
+        }
+
+        DomModule.displayPhotoPosts(Module.getPhotoPosts(Module.countShowedPosts, 10, filter_config));
+
+    };
 
     /**************************************************************************************************/
     /*Начальная страница*/
@@ -169,31 +197,49 @@ document.addEventListener("DOMContentLoaded", function (event) {
     /*Добавление поста*/
 
     let add_tags_new_post = document.getElementsByClassName("new-post-add-tags")[0];
-    add_tags_new_post.onclick = function () {
 
-        let tags = prompt("Впишите через пробел желаемые теги. Помните, что длина тега не должна превышать 20 символов", "");
+    add_tags_new_post.onclick = function () {
         let list_tags_new_post = [];
+        let tags = prompt("Впишите через пробел желаемые теги. Помните, что длина тега не должна превышать 20 символов", "");
+
+        let beginListTags = document.getElementsByClassName("list-new-tags")[0];
         if (tags.length !== 0) {
             list_tags_new_post = tags.split(/(\s+)/).filter(function (e) {
-                return e.trim().length > 0;
+                return e.trim().length;
             });
 
             add_tags_new_post.innerHTML = "Изменить теги";
 
-            document.getElementsByClassName("tags_new_post")[0].style.display = "inline-block";
+
+            for (let i = 0; i < list_tags_new_post.length; i++) {
+                let oneTag = document.createElement("li");
+                oneTag.innerHTML = list_tags_new_post[i];
+                beginListTags.appendChild(oneTag);
+            }
+
         } else {
-
             add_tags_new_post.innerHTML = "Добавить теги";
-
-            document.getElementsByClassName("tags_new_post")[0].style.display = "none";
-
+            let last;
+            while (last = beginListTags.lastChild) {
+                beginListTags.removeChild(last)
+            }
         }
     };
+
+    /*//////////////////////////////////////////////////////////////////////////////////////*/
 
     let new_post_ok = document.getElementsByClassName("new-post-ok")[0];
     new_post_ok.onclick = function () {
         let answer = confirm("Добавить пост?");
     };
+
+    let add_photo_in_post = document.getElementById("file");
+    add_photo_in_post.addEventListener("change", function (e) {
+        let fileName = this.files[0].name;
+        if (fileName) {
+            add_photo_in_post.nextElementSibling.querySelector("span").innerHTML = fileName;
+        }
+    });
 
     /**************************************************************************************************/
     /*Страница входа*/
@@ -250,35 +296,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     };
 
     /****************************************************************************************************/
-    /*ВЫХОД*/
-    door.onclick = function () {
-        lenta.style.display = "none";
-        registration_page.style.display = "none";
-        sign_page.style.display = "none";
-        welcome_page.style.display = "block";
-
-        document.body.classList.add("welcome");
-
-        Module.setUser(null, null);
-        DomModule.initUser();
-        username.style.display = "none";
-        reg_sign.style.display = "inline-block";
-    };
-
-    reg_sign.onclick = function () {
-        lenta.style.display = "none";
-        registration_page.style.display = "none";
-        sign_page.style.display = "none";
-        welcome_page.style.display = "block";
-
-        document.body.classList.add("welcome");
-
-        Module.setUser(null, null);
-        DomModule.initUser();
-        username.style.display = "none";
-        reg_sign.style.display = "inline-block";
-    };
-
 
     /****************************************************************************************************/
     /*Мой профиль*/
@@ -330,6 +347,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     };
 
 
+    let clip_circle = document.getElementsByClassName("clip-circle")[0];
+    let profile_name = document.getElementsByClassName("profile-name")[0];
+
+
     /*Вход*/
     document.getElementsByClassName("registration-button")[0].onclick = function () {
 
@@ -360,29 +381,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.getElementsByClassName("clip-circle")[0].style.display = "block";
             document.getElementsByClassName("add-button")[0].style.display = "block";
 
+            if (add_username) {
+
+                let child_author = document.createElement('p');
+                child_author.className = "author";
+                child_author.innerHTML = Module.getUser().login;
+                let before = document.getElementsByClassName("new_image_wrapper")[0];
+                clip_circle.insertBefore(child_author, before);
+
+
+                let child = document.createElement('span');
+                child.className = "prof-name";
+                child.innerHTML = Module.getUser().login;
+                profile_name.appendChild(child);
+
+                add_username = false;
+            }
         }
+
+        DomModule.displayPhotoPosts(Module.getPhotoPosts(Module.countShowedPosts, 10, filter_config));
     };
 
     /*************************************************************************************/
 
-
     username.onclick = function () {
-
-        /**/
-        let clip_circle = document.getElementsByClassName("clip-circle")[0];
-
-        let child_author = document.createElement('p');
-        child_author.className = "author";
-        child_author.innerHTML = Module.getUser().login;
-        let before = document.getElementsByClassName("new_image_wrapper")[0];
-        clip_circle.insertBefore(child_author, before);
-
-
-        let profile_name = document.getElementsByClassName("profile-name")[0];
-        let child = document.createElement('span');
-        child.innerHTML = Module.getUser().login;
-        profile_name.appendChild(child);
-
 
         my_profile_page.style.display = "block";
         lenta.style.display = "none";
@@ -394,6 +416,41 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.body.classList.remove("registration");
         document.body.classList.remove("sign");
 
+    };
 
-    }
+    /*******************************************************************/
+    /*ВЫХОД*/
+    door.onclick = function () {
+        lenta.style.display = "none";
+        registration_page.style.display = "none";
+        sign_page.style.display = "none";
+        welcome_page.style.display = "block";
+
+        document.body.classList.add("welcome");
+
+        Module.setUser(null, null);
+        DomModule.initUser();
+        username.style.display = "none";
+        reg_sign.style.display = "inline-block";
+
+        add_username = true;
+        clip_circle.removeChild(document.getElementsByClassName("author")[0]);
+        profile_name.removeChild(document.getElementsByClassName("prof-name")[0]);
+    };
+
+    reg_sign.onclick = function () {
+        lenta.style.display = "none";
+        registration_page.style.display = "none";
+        sign_page.style.display = "none";
+        welcome_page.style.display = "block";
+
+        document.body.classList.add("welcome");
+
+        Module.setUser(null, null);
+        DomModule.initUser();
+        username.style.display = "none";
+        reg_sign.style.display = "inline-block";
+    };
+
+
 }());

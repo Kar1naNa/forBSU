@@ -2,6 +2,8 @@ var Module = (function () {
 
     var user = {};
 
+    let allPostsShowed = false;
+
     var setUser = function (login, password) {
         user.login = login;
 
@@ -21,6 +23,11 @@ var Module = (function () {
     var filter = {};
 
     var countShowedPosts = 0;
+
+    let setCountShowedPosts = function (num) {
+        countShowedPosts = num;
+    };
+
 
     var photoPosts = [
         {
@@ -339,9 +346,9 @@ var Module = (function () {
         }
     ];
 
-    var photoPostsString = JSON.stringify(photoPosts);
+    // var photoPostsString = JSON.stringify(photoPosts);
 
-    localStorage.setItem("photoPosts", photoPostsString);
+    //localStorage.setItem("photoPosts", photoPostsString);
 
     var checkers = {
 
@@ -416,10 +423,10 @@ var Module = (function () {
         let skipped = 0;
         let photoPostsFilter = [];
 
-        //получаем посты из локал и парсим в массив
-        photoPosts = JSON.parse(localStorage.getItem("photoPosts"));
+        // photoPosts = JSON.parse(localStorage.getItem("photoPosts"));
 
-        for (var i = 0; i < photoPosts.length; i++) {
+        for (let i = 0; i < photoPosts.length; i++) {
+
             if (checkPostForFilterSuitable(photoPosts[i], filterConfig)) {
                 if (skipped < skip) {
                     skipped++;
@@ -432,9 +439,12 @@ var Module = (function () {
             }
         }
 
-        filter = filterConfig;
+        /*   filter = filterConfig;
 
-
+           if (countShowedPosts === photoPosts.length){
+               allPostsShowed = true;
+           }
+   */
         return photoPostsFilter;
     };
 
@@ -445,12 +455,11 @@ var Module = (function () {
                 isGood = false;
             }
 
-            if (isGood && filterConfig.hashTags && filterConfig.hashTags.length
-                && photoPost.hashTags.length) {
+            if (isGood && !!filterConfig.hashTags && filterConfig.hashTags.length > 0) {
                 for (let j = 0; j < filterConfig.hashTags.length; j++) {
                     let hashtag = filterConfig.hashTags[j];
 
-                    if (!photoPost.hashTags.includes(hashtag)) {
+                    if (!photoPost.hashTags || !photoPost.hashTags.includes(hashtag)) {
                         isGood = false;
                         break;
                     }
@@ -525,8 +534,15 @@ var Module = (function () {
 
     };
 
+    let getCountShowedPosts = function () {
+        return countShowedPosts;
+    };
+
     return {
+        allPostsShowed: allPostsShowed,
         countShowedPosts: countShowedPosts,
+        setCountShowedPosts: setCountShowedPosts,
+        getCountShowedPosts: getCountShowedPosts,
         getPhotoPosts: getPhotoPosts,
         getPhotoPost: getPhotoPost,
         validatePhotoPost: validatePhotoPost,
@@ -643,6 +659,11 @@ var DomModule = (function () {
     function createLikeWrapperBlock(photoPost) {
 
         let likeWrapper = document.createElement('div');
+
+        likeWrapper.onclick = () => {
+            editPhotoPostBlock(photoPost.countLikes++);
+        };
+
         likeWrapper.className = "count-likes";
 
         let heart = document.createElement('img');
@@ -655,6 +676,7 @@ var DomModule = (function () {
             heart.src = "assets/whitelike.png";
             heart.alt = "Нравится?";
         }
+
 
         let countLikes = document.createElement('span');
         countLikes.innerHTML = photoPost.likes.length;
@@ -677,26 +699,43 @@ var DomModule = (function () {
         return likeWrapper;
     }
 
+
+    function createSettingsBlock(photoPost) {
+        let settingWrapperDiv =document.createElement('div');
+        settingWrapperDiv.className = "setting";
+
+        let setting = document.createElement('img');
+        setting.className = "actionElements";
+
+        setting.src = "assets/settings.png";
+        setting.alt = "Изменить/удалить";
+
+        settingWrapperDiv.appendChild(setting);
+    }
+
     function createActionsWrapper(photoPost) {
         let actionsWrapperDiv = document.createElement('div');
         actionsWrapperDiv.className = "actions-wrapper";
 
         actionsWrapperDiv.appendChild(createFavoriteWrapperBlock(photoPost));
         actionsWrapperDiv.appendChild(createLikeWrapperBlock(photoPost));
+        
 
-
-        if (Module.getUser() && Module.getUser().idPerson === photoPost.idPerson) {
+        if (!!Module.getUser().login && Module.getUser().login === photoPost.author) {
             let changeWrapper = document.createElement('div');
             changeWrapper.className = "changePost";
 
+            cre
+
             let changePostImg = document.createElement("img");
             changePostImg.src = "assets/settings.png";
-            changePostImg.alt = "Изменить";
+            changePostImg.alt = "Изменить/Удалить";
             changePostImg.className = "actionElements";
 
             changeWrapper.appendChild(changePostImg);
 
             actionsWrapperDiv.appendChild(changeWrapper);
+
         }
 
         return actionsWrapperDiv;
